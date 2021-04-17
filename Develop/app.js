@@ -52,17 +52,87 @@ function buildTeam () {
          type:"list",
          name: "memberType",
          message: "Do you want to add an Engineer or Intern?",
-         choices: ["Engineer", "Intern"],
+         choices: ["Engineer", "Intern", "Done Building Team"],
         }
-    ] .then (response => {
+    ]) .then (response => {
         if (response.memberType === "Engineer") {
-            // run function for engineer prompt/add
+            createEngineer();
+        } else if (response.memberType === "Intern") {
+            createIntern();
         } else {
-            // run function for intern prompt/add
+            render(teamMembers);
+            // outputPath(response);
+            // }) 
         }
-    })
+     }
+            // console.log(teamMembers)    
+)}
 
-    }   
+function createEngineer () {
+    inquirer.prompt([
+        {
+         type:"input",
+         name: "engineerName",
+         message: "What is your engineer's name?"
+        },
+        {
+         type: "input",
+         name: "engineerId",
+         message: "What is your engineer's employee ID?"
+        },
+        {
+         type: "input",
+         name: "engineerEmail",           
+         message: "What is your engineer's email address?",
+        },
+        {
+         type: "input",
+         name: "engineerGithub",
+         message: "What is your engineer's github username?",
+        }
+        
+    ])
+     .then((response)=> { 
+         const engineer = new Engineer(response.engineerName, response.engineerId, response.engineerEmail, response.engineerGithub);
+         teamMembers.push(engineer);
+         idArray.push(response.engineerId);
+         buildTeam();
+     });   
+ };
+
+ function createIntern () {
+    inquirer.prompt([
+        {
+         type:"input",
+         name: "internName",
+         message: "What is your intern's name?"
+        },
+        {
+         type: "input",
+         name: "internId",
+         message: "What is your intern's employee ID?"
+        },
+        {
+         type: "input",
+         name: "internEmail",           
+         message: "What is your intern's email address?",
+        },
+        {
+         type: "input",
+         name: "internSchool",
+         message: "What school is your intern from?",
+        }
+        
+    ])
+     .then((response)=> { 
+         const intern = new Intern(response.internName, response.internId, response.internEmail, response.internSchool);
+         teamMembers.push(intern);
+         idArray.push(response.internId);
+         buildTeam();
+     });   
+ }
+
+// function renderTeam on htmlRenderer.js (required here)
 
 addManager();
     
