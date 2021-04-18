@@ -1,9 +1,12 @@
 const path = require("path");
 const fs = require("fs");
+// const app = require("./Develop/app.js")
 
 const templatesDir = path.resolve(__dirname, "../templates");
 
 const render = employees => {
+  console.log("employee", employees);
+
   const html = [];
 
   html.push(...employees
