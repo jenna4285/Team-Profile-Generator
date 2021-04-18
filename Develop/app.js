@@ -60,7 +60,9 @@ function buildTeam () {
         } else if (response.memberType === "Intern") {
             createIntern();
         } else {
-            render(teamMembers);
+            console.log(teamMembers);
+            render(outputPath, teamMembers);
+            
             // outputPath(response);
             // }) 
         }
