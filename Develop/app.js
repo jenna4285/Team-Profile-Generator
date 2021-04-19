@@ -63,7 +63,7 @@ function buildTeam () {
             createIntern();
         } else {
             console.log("app", teamMembers);
-            fs.writeFileSync(OUTPUT_DIR, render(teamMembers), "utf-8");
+            fs.writeFileSync(outputPath, render(teamMembers), "utf-8");
             };
      }  
 )};
